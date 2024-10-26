@@ -7,6 +7,7 @@ abstract interface class NetworkService {
   Future<Response<T>> get<T>(
     String url, {
     required HeaderMap headers,
+    Map<String, dynamic>? queryParameters,
   });
 
   Future<Response<T>> post<T>(
