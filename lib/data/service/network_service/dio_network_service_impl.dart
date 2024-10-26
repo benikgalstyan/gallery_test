@@ -26,11 +26,13 @@ class DioNetworkServiceImpl implements NetworkService {
   Future<Response<T>> get<T>(
     String url, {
     required HeaderMap headers,
+    Map<String, dynamic>? queryParameters,
   }) async {
     try {
       final response = await _dio.get<T>(
         url,
         options: Options(headers: headers),
+        queryParameters: queryParameters,
       );
       return response;
     } catch (e) {
