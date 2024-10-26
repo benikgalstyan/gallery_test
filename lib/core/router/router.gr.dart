@@ -22,9 +22,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     PhotoDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<PhotoDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const PhotoDetailScreen(),
+        child: PhotoDetailScreen(
+          key: args.key,
+          photo: args.photo,
+        ),
       );
     },
   };
@@ -46,14 +50,38 @@ class MainRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [PhotoDetailScreen]
-class PhotoDetailRoute extends PageRouteInfo<void> {
-  const PhotoDetailRoute({List<PageRouteInfo>? children})
-      : super(
+class PhotoDetailRoute extends PageRouteInfo<PhotoDetailRouteArgs> {
+  PhotoDetailRoute({
+    Key? key,
+    required Photo photo,
+    List<PageRouteInfo>? children,
+  }) : super(
           PhotoDetailRoute.name,
+          args: PhotoDetailRouteArgs(
+            key: key,
+            photo: photo,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'PhotoDetailRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<PhotoDetailRouteArgs> page =
+      PageInfo<PhotoDetailRouteArgs>(name);
+}
+
+class PhotoDetailRouteArgs {
+  const PhotoDetailRouteArgs({
+    this.key,
+    required this.photo,
+  });
+
+  final Key? key;
+
+  final Photo photo;
+
+  @override
+  String toString() {
+    return 'PhotoDetailRouteArgs{key: $key, photo: $photo}';
+  }
 }
